@@ -1,8 +1,8 @@
 import "./App.css";
-import Header from "./assets/Header/Header.jsx";
-import PopNewCard from "./assets/PopNewCard/PopNewCard.jsx";
-import PopBrowse from "./assets/PopBrowse/PopBrowse.jsx";
-import Main from "./assets/Main/Main.jsx";
+import Header from "./assets/components/Header/Header.jsx";
+import PopNewCard from "./assets/components/PopNewCard/PopNewCard.jsx";
+import PopBrowse from "./assets/components/PopBrowse/PopBrowse.jsx";
+import Main from "./assets/components//Main/Main.jsx";
 
 function App() {
   return (
@@ -14,11 +14,7 @@ function App() {
               <div className="pop-exit__ttl">
                 <h2>Выйти из аккаунта?</h2>
               </div>
-              <htmlForm
-                className="pop-exit__htmlForm"
-                id="htmlFormExit"
-                action="#"
-              >
+              <form className="pop-exit__htmlForm" id="htmlFormExit" action="#">
                 <div className="pop-exit__htmlForm-group">
                   <button className="pop-exit__exit-yes _hover01" id="exitYes">
                     <a href="modal/signin.html">Да, выйти</a>{" "}
@@ -27,7 +23,7 @@ function App() {
                     <a href="main.html">Нет, остаться</a>{" "}
                   </button>
                 </div>
-              </htmlForm>
+              </form>
             </div>
           </div>
         </div>

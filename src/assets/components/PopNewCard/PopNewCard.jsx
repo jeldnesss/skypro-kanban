@@ -10,36 +10,36 @@ const PopNewCard = () => {
               &#10006;
             </a>
             <div className="pop-new-card__wrap">
-              <htmlForm
-                className="pop-new-card__htmlForm htmlForm-new"
-                id="htmlFormNewCard"
+              <form
+                className="pop-new-card__form form-new"
+                id="formNewCard"
                 action="#"
               >
-                <div className="htmlForm-new__block">
-                  <label htmlFor="htmlFormTitle" className="subttl">
+                <div className="form-new__block">
+                  <label htmlFor="formTitle" className="subttl">
                     Название задачи
                   </label>
                   <input
-                    className="htmlForm-new__input"
+                    className="form-new__input"
                     type="text"
                     name="name"
-                    id="htmlFormTitle"
+                    id="formTitle"
                     placeholder="Введите название задачи..."
                     autoFocus
                   />
                 </div>
-                <div className="htmlForm-new__block">
+                <div className="form-new__block">
                   <label htmlFor="textArea" className="subttl">
                     Описание задачи
                   </label>
                   <textarea
-                    className="htmlForm-new__area"
+                    className="form-new__area"
                     name="text"
                     id="textArea"
                     placeholder="Введите описание задачи..."
                   ></textarea>
                 </div>
-              </htmlForm>
+              </form>
               <Calendar />
             </div>
 
@@ -57,7 +57,7 @@ const PopNewCard = () => {
                 </div>
               </div>
             </div>
-            <button className="htmlForm-new__create _hover01" id="btnCreate">
+            <button className="form-new__create _hover01" id="btnCreate">
               Создать задачу
             </button>
           </div>

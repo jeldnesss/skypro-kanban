@@ -1,6 +1,9 @@
 import Card from "../Card/Card.jsx";
+import { cards } from "../../../data.js";
 
 const Column = ({ title }) => {
+  const columnCards = cards.filter((card) => card.status === title);
+
   return (
     <div className="main__column column">
       <div className="column__title">
@@ -8,19 +11,15 @@ const Column = ({ title }) => {
       </div>
 
       <div className="cards">
-        <Card
-          theme="Web Design"
-          color="_orange"
-          title="Название задачи"
-          date="30.10.23"
-        />
-
-        <Card
-          theme="Research"
-          color="_green"
-          title="Название задачи"
-          date="30.10.23"
-        />
+        {columnCards.map((card) => (
+          <Card
+            key={card.id}
+            topic={card.topic}
+            title={card.title}
+            date={card.date}
+            status={card.status}
+          />
+        ))}
       </div>
     </div>
   );

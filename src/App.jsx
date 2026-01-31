@@ -3,6 +3,7 @@ import Header from "./assets/components/Header/Header.jsx";
 import PopNewCard from "./assets/components/PopNewCard/PopNewCard.jsx";
 import PopBrowse from "./assets/components/PopBrowse/PopBrowse.jsx";
 import Main from "./assets/components//Main/Main.jsx";
+import { GlobalStyles } from "./assets/components/style/GlobalStyles.js";  
 
 function App() {
   return (

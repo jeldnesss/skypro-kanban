@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Column from "../Column/Column.jsx";
-
+import { MainBlock, MainContent, MainMain } from "./Main.styled.js";
+import { Container } from "../style/Container.styled.js";
 const Main = () => {
   const [loading, setLoad] = useState(true);
 
@@ -11,10 +12,10 @@ const Main = () => {
     return () => clearTimeout(timer);
   }, []);
   return (
-    <main className="main">
-      <div className="container">
-        <div className="main__block">
-          <div className="main__content">
+    <MainMain>
+      <Container>
+        <MainBlock>
+          <MainContent>
             {loading ? (
               <p className="loader">Данные загружаются ...</p>
             ) : (
@@ -26,10 +27,10 @@ const Main = () => {
                 <Column title="Готово" />
               </>
             )}
-          </div>
-        </div>
-      </div>
-    </main>
+          </MainContent>
+        </MainBlock>
+      </Container>
+    </MainMain>
   );
 };
 

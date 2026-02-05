@@ -12,12 +12,12 @@ import {
   CardTitle,
 } from "./Card.styled";
 
-const Card = ({ topic, title, date, status }) => {
+const Card = ({ topic, title, date }) => {
   return (
     <CardsItem>
       <CardsCard>
         <CardGroup>
-          <CardTheme status={status}>
+          <CardTheme topic={topic}>
             <CardThemeText>{topic}</CardThemeText>
           </CardTheme>
 

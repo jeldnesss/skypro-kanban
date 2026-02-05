@@ -1,6 +1,11 @@
 import Card from "../Card/Card.jsx";
-import { cards } from "../../../data.js";
-import { ColumnTitle, MainColumn, ColumnCards } from "./Column.styled.js";
+import { cards } from "../../data.js";
+import {
+  ColumnTitle,
+  MainColumn,
+  ColumnCards,
+  ColumnHeadTitle,
+} from "./Column.styled.js";
 
 const Column = ({ title }) => {
   const columnCards = cards.filter((card) => card.status === title);
@@ -8,7 +13,7 @@ const Column = ({ title }) => {
   return (
     <MainColumn>
       <ColumnTitle>
-        <p>{title}</p>
+        <ColumnHeadTitle>{title}</ColumnHeadTitle>
       </ColumnTitle>
 
       <ColumnCards>

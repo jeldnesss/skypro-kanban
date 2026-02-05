@@ -33,31 +33,30 @@ export const CardTheme = styled.div`
   height: 20px;
   padding: 5px 14px;
   border-radius: 18px;
-  background-color: ${({ status }) => {
-    switch (status) {
-      case "Готово":
-        return "#B4FDD1";
-      case "В работе":
+
+  background-color: ${({ topic }) => {
+    switch (topic) {
+      case "Web Design":
         return "#FFE4C2";
-      case "Нужно сделать":
-      case "Тестирование":
+      case "Research":
+        return "#B4FDD1";
+      case "Copywriting":
         return "#E9D4FF";
       default:
-        return "#94A6BE";
+        return "#FFE4C2";
     }
   }};
 
-  color: ${({ status }) => {
-    switch (status) {
-      case "Готово":
-        return "#06B16E";
-      case "В работе":
+  color: ${({ topic }) => {
+    switch (topic) {
+      case "Web Design":
         return "#FF6D00";
-      case "Нужно сделать":
-      case "Тестирование":
+      case "Research":
+        return "#06B16E";
+      case "Copywriting":
         return "#9A48F1";
       default:
-        return "#FFFFFF";
+        return "#FF6D00";
     }
   }};
 `;
@@ -77,6 +76,7 @@ export const CardBtn = styled.button`
   padding: 2px;
   border: none;
   outline: none;
+  border-radius: 5px;
 `;
 
 export const CardBtnBox = styled.div`

@@ -16,4 +16,9 @@ export const ColumnCards = styled.div`
   position: relative;
 `;
 
-
+export const ColumnHeadTitle = styled.p`
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #94a6be;
+`;

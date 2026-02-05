@@ -1,16 +1,22 @@
 import Card from "../Card/Card.jsx";
-import { cards } from "../../../data.js";
+import { cards } from "../../data.js";
+import {
+  ColumnTitle,
+  MainColumn,
+  ColumnCards,
+  ColumnHeadTitle,
+} from "./Column.styled.js";
 
 const Column = ({ title }) => {
   const columnCards = cards.filter((card) => card.status === title);
 
   return (
-    <div className="main__column column">
-      <div className="column__title">
-        <p>{title}</p>
-      </div>
+    <MainColumn>
+      <ColumnTitle>
+        <ColumnHeadTitle>{title}</ColumnHeadTitle>
+      </ColumnTitle>
 
-      <div className="cards">
+      <ColumnCards>
         {columnCards.map((card) => (
           <Card
             key={card.id}
@@ -20,8 +26,8 @@ const Column = ({ title }) => {
             status={card.status}
           />
         ))}
-      </div>
-    </div>
+      </ColumnCards>
+    </MainColumn>
   );
 };
 

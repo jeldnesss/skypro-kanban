@@ -15,13 +15,16 @@ import {
   CalendarPeriod,
   CalendarPeriodText,
 } from "./Calendar.styled.js";
+
 const Calendar = () => {
   return (
     <CalendarPopNewCard>
       <CalendarSubtitle>Даты</CalendarSubtitle>
+
       <CalendarBlock>
         <CalendarNav>
           <CalendarMonth>Сентябрь 2023</CalendarMonth>
+
           <CalendarActions>
             <CalendarAction data-action="prev">
               <CalendarSvg
@@ -33,6 +36,7 @@ const Calendar = () => {
                 <path d="M5.72945 1.95273C6.09018 1.62041 6.09018 1.0833 5.72945 0.750969C5.36622 0.416344 4.7754 0.416344 4.41218 0.750969L0.528487 4.32883C-0.176162 4.97799 -0.176162 6.02201 0.528487 6.67117L4.41217 10.249C4.7754 10.5837 5.36622 10.5837 5.72945 10.249C6.09018 9.9167 6.09018 9.37959 5.72945 9.04727L1.87897 5.5L5.72945 1.95273Z" />
               </CalendarSvg>
             </CalendarAction>
+
             <CalendarAction data-action="next">
               <CalendarSvg
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,6 +49,7 @@ const Calendar = () => {
             </CalendarAction>
           </CalendarActions>
         </CalendarNav>
+
         <CalendarContent>
           <CalendarDaysNames>
             <DayName>пн</DayName>
@@ -52,51 +57,65 @@ const Calendar = () => {
             <DayName>ср</DayName>
             <DayName>чт</DayName>
             <DayName>пт</DayName>
-            <DayName weekend>сб</DayName>
-            <DayName weekend>вс</DayName>
+            <DayName $weekend>сб</DayName>
+            <DayName $weekend>вс</DayName>
           </CalendarDaysNames>
+
           <CalendarCells>
-            <CalendarCell other>28</CalendarCell>
-            <CalendarCell other>29</CalendarCell>
-            <CalendarCell other>30</CalendarCell>
+            <CalendarCell $other>28</CalendarCell>
+            <CalendarCell $other>29</CalendarCell>
+            <CalendarCell $other>30</CalendarCell>
+
             <CalendarCell>31</CalendarCell>
             <CalendarCell>1</CalendarCell>
-            <CalendarCell weekend>2</CalendarCell>
-            <CalendarCell weekend>3</CalendarCell>
+
+            <CalendarCell $weekend>2</CalendarCell>
+            <CalendarCell $weekend>3</CalendarCell>
+
             <CalendarCell>4</CalendarCell>
             <CalendarCell>5</CalendarCell>
             <CalendarCell>6</CalendarCell>
             <CalendarCell>7</CalendarCell>
-            <CalendarCell current>8</CalendarCell>
-            <CalendarCell weekend>9</CalendarCell>
-            <CalendarCell weekend>10</CalendarCell>
+
+            <CalendarCell $current>8</CalendarCell>
+
+            <CalendarCell $weekend>9</CalendarCell>
+            <CalendarCell $weekend>10</CalendarCell>
+
             <CalendarCell>11</CalendarCell>
             <CalendarCell>12</CalendarCell>
             <CalendarCell>13</CalendarCell>
             <CalendarCell>14</CalendarCell>
             <CalendarCell>15</CalendarCell>
-            <CalendarCell weekend>16</CalendarCell>
-            <CalendarCell weekend>17</CalendarCell>
+
+            <CalendarCell $weekend>16</CalendarCell>
+            <CalendarCell $weekend>17</CalendarCell>
+
             <CalendarCell>18</CalendarCell>
             <CalendarCell>19</CalendarCell>
             <CalendarCell>20</CalendarCell>
             <CalendarCell>21</CalendarCell>
             <CalendarCell>22</CalendarCell>
-            <CalendarCell weekend>23</CalendarCell>
-            <CalendarCell weekend>24</CalendarCell>
+
+            <CalendarCell $weekend>23</CalendarCell>
+            <CalendarCell $weekend>24</CalendarCell>
+
             <CalendarCell>25</CalendarCell>
             <CalendarCell>26</CalendarCell>
             <CalendarCell>27</CalendarCell>
             <CalendarCell>28</CalendarCell>
             <CalendarCell>29</CalendarCell>
-            <CalendarCell weekend>30</CalendarCell>
-            <CalendarCell weekend other>
+
+            <CalendarCell $weekend>30</CalendarCell>
+
+            <CalendarCell $weekend $other>
               1
             </CalendarCell>
           </CalendarCells>
         </CalendarContent>
 
         <input type="hidden" id="datepick_value" value="08.09.2023" />
+
         <CalendarPeriod>
           <CalendarPeriodText>
             Выберите срок исполнения <span></span>.
@@ -106,4 +125,5 @@ const Calendar = () => {
     </CalendarPopNewCard>
   );
 };
+
 export default Calendar;

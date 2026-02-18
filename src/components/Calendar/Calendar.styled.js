@@ -71,7 +71,7 @@ export const CalendarDaysNames = styled.div`
   padding: 0 7px;
 `;
 export const DayName = styled.div`
-  color: ${({ weekend }) => (weekend ? "#E5533D" : "#94A6BE")};
+  color: ${({ $weekend }) => ($weekend ? "#E5533D" : "#94A6BE")};
   font-size: 10px;
   font-weight: 500;
   line-height: normal;
@@ -99,19 +99,19 @@ export const CalendarCell = styled.div`
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
-  ${({ other }) =>
-    other &&
+  ${({ $other }) =>
+    $other &&
     css`
       color: #94a6be;
     `}
-  ${({ weekend }) =>
-    weekend &&
+  ${({ $weekend }) =>
+    $weekend &&
     css`
       color: #e5533d;
     `}
 
-  ${({ current }) =>
-    current &&
+  ${({ $current }) =>
+    $current &&
     css`
       background-color: #565eef;
       color: #fff;

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const PopBrowse = () => {
   return (
     <div className="pop-browse" id="popBrowse">
@@ -161,33 +163,33 @@ const PopBrowse = () => {
             <div className="pop-browse__btn-browse ">
               <div className="btn-group">
                 <button className="btn-browse__edit _btn-bor _hover03">
-                  <a href="#">Редактировать задачу</a>
+                  <Link to="/">Редактировать задачу</Link>
                 </button>
                 <button className="btn-browse__delete _btn-bor _hover03">
-                  <a href="#">Удалить задачу</a>
+                  <Link to="/">Удалить задачу</Link>
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+                <Link to="/">Закрыть</Link>
               </button>
             </div>
             <div className="pop-browse__btn-edit _hide">
               <div className="btn-group">
                 <button className="btn-edit__edit _btn-bg _hover01">
-                  <a href="#">Сохранить</a>
+                  <Link to="/">Сохранить</Link>
                 </button>
                 <button className="btn-edit__edit _btn-bor _hover03">
-                  <a href="#">Отменить</a>
+                  <Link to="/">Отменить</Link>
                 </button>
                 <button
                   className="btn-edit__delete _btn-bor _hover03"
                   id="btnDelete"
                 >
-                  <a href="#">Удалить задачу</a>
+                  <Link to="/">Удалить задачу</Link>
                 </button>
               </div>
               <button className="btn-edit__close _btn-bg _hover01">
-                <a href="#">Закрыть</a>
+                <Link to="/">Закрыть</Link>
               </button>
             </div>
           </div>

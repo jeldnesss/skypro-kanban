@@ -10,6 +10,10 @@ import {
 } from "./PopUser.styled";
 
 const PopUser = ({ isOpen }) => {
+  function handleExit(e) {
+    e.preventDefault();
+    localStorage.removeItem("isAuth");
+  }
   return (
     <PopUserHeader
       id="user-set-target"
@@ -22,8 +26,8 @@ const PopUser = ({ isOpen }) => {
         <ThemeText>Темная тема</ThemeText>
         <ThemeInput type="checkbox" className="checkbox" name="checkbox" />
       </PopUserTheme>
-      <PopUserBtn type="button" className="_hover03">
-        <PopUserBtnLink href="#popExit">Выйти</PopUserBtnLink>
+      <PopUserBtn onClick={handleExit} type="button" className="_hover03">
+        <PopUserBtnLink to="/sign-in">Выйти</PopUserBtnLink>
       </PopUserBtn>
     </PopUserHeader>
   );

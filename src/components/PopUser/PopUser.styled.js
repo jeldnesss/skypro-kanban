@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const PopUserHeader = styled.div`
@@ -87,6 +88,6 @@ export const PopUserBtn = styled.button`
   border: 1px solid #565eef;
 `;
 
-export const PopUserBtnLink = styled.a`
+export const PopUserBtnLink = styled(Link)`
   color: #565eef;
 `;

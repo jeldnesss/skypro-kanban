@@ -13,12 +13,12 @@ import {
   SignInWrapper,
 } from "../style/SignIn.styled";
 
-function SignIn({ setIsAuth }) {
+function SignIn() {
   const navigate = useNavigate();
 
   function handleLogin(e) {
     e.preventDefault();
-    setIsAuth(true);
+    localStorage.setItem("isAuth", "true");
     navigate("/");
   }
 

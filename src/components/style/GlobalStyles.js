@@ -49,9 +49,6 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     color: #000000;
-  }
-
-  body {
     background-color: #EAEEF6;
   }
 
@@ -62,7 +59,7 @@ export const GlobalStyles = createGlobalStyle`
     width: 100vw;
     min-height: 100vh;
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: #EAEEF6;
   }
 
   .container {

@@ -11,7 +11,9 @@ import PopExitModal from "../components/PopExit/PopExit";
 import PopBrowse from "../components/PopBrowse/PopBrowse";
 
 function AppRoutes() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(
+    localStorage.getItem("isAuth") === "true",
+  );
   return (
     <Routes>
       <Route element={<PrivateRoute isAuth={isAuth} />}>

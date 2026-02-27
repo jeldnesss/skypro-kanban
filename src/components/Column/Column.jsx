@@ -20,6 +20,7 @@ const Column = ({ title }) => {
         {columnCards.map((card) => (
           <Card
             key={card.id}
+            id={card.id} // ← обязательно!
             topic={card.topic}
             title={card.title}
             date={card.date}

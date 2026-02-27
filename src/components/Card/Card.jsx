@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   CardBtn,
   CardBtnBox,
@@ -12,7 +13,7 @@ import {
   CardTitle,
 } from "./Card.styled";
 
-const Card = ({ topic, title, date }) => {
+const Card = ({ id, topic, title, date }) => {
   return (
     <CardsItem>
       <CardsCard>
@@ -21,18 +22,18 @@ const Card = ({ topic, title, date }) => {
             <CardThemeText>{topic}</CardThemeText>
           </CardTheme>
 
-          <a href="#popBrowse">
+          {/* Ссылка на PopBrowse через React Router */}
+          <Link to={`/card/${id}`}>
             <CardBtn>
               <CardBtnBox />
               <CardBtnBox />
               <CardBtnBox />
             </CardBtn>
-          </a>
+          </Link>
         </CardGroup>
 
         <CardContent>
           <CardTitle>{title}</CardTitle>
-
           <CardDate>
             <CardDateText>{date}</CardDateText>
           </CardDate>

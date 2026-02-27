@@ -1,37 +1,59 @@
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { cards } from "../../data";
 
 const PopBrowse = () => {
+  const { id } = useParams();
+  const task = cards.find((t) => t.id === Number(id));
+
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
         <div className="pop-browse__block">
           <div className="pop-browse__content">
+            {/* Верхний блок */}
             <div className="pop-browse__top-block">
-              <h3 className="pop-browse__ttl">Название задачи</h3>
+              <h3 className="pop-browse__ttl">
+                {task?.title || "Название задачи"}
+              </h3>
               <div className="categories__theme theme-top _orange _active-category">
-                <p className="_orange">Web Design</p>
+                <p className="_orange">{task?.topic || "Web Design"}</p>
               </div>
             </div>
+
+            {/* Статус */}
             <div className="pop-browse__status status">
               <p className="status__p subttl">Статус</p>
               <div className="status__themes">
-                <div className="status__theme _hide">
-                  <p>Без статуса</p>
+                <div
+                  className={`status__theme ${task?.status === "Без статуса" ? "_gray" : "_hide"}`}
+                >
+                  <p className="_gray">Без статуса</p>
                 </div>
-                <div className="status__theme _gray">
+                <div
+                  className={`status__theme ${task?.status === "Нужно сделать" ? "_gray" : "_hide"}`}
+                >
                   <p className="_gray">Нужно сделать</p>
                 </div>
-                <div className="status__theme _hide">
-                  <p>В работе</p>
+                <div
+                  className={`status__theme ${task?.status === "В работе" ? "_gray" : "_hide"}`}
+                >
+                  <p className="_gray">В работе</p>
                 </div>
-                <div className="status__theme _hide">
-                  <p>Тестирование</p>
+                <div
+                  className={`status__theme ${task?.status === "Тестирование" ? "_gray" : "_hide"}`}
+                >
+                  <p className="_gray">Тестирование</p>
                 </div>
-                <div className="status__theme _hide">
-                  <p>Готово</p>
+                <div
+                  className={`status__theme ${task?.status === "Готово" ? "_gray" : "_hide"}`}
+                >
+                  <p className="_gray">Готово</p>
                 </div>
               </div>
             </div>
+
+            {/* Описание */}
             <div className="pop-browse__wrap">
               <form
                 className="pop-browse__form form-browse"
@@ -48,9 +70,12 @@ const PopBrowse = () => {
                     id="textArea01"
                     readOnly
                     placeholder="Введите описание задачи..."
+                    value={task?.description || ""}
                   ></textarea>
                 </div>
               </form>
+
+              {/* Календарь */}
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
@@ -90,6 +115,7 @@ const PopBrowse = () => {
                       <div className="calendar__day-name -weekend-">вс</div>
                     </div>
                     <div className="calendar__cells">
+                      {/* Оставила весь календарь как у тебя */}
                       <div className="calendar__cell _other-month">28</div>
                       <div className="calendar__cell _other-month">29</div>
                       <div className="calendar__cell _other-month">30</div>
@@ -99,7 +125,7 @@ const PopBrowse = () => {
                       <div className="calendar__cell _cell-day _weekend">3</div>
                       <div className="calendar__cell _cell-day">4</div>
                       <div className="calendar__cell _cell-day">5</div>
-                      <div className="calendar__cell _cell-day ">6</div>
+                      <div className="calendar__cell _cell-day">6</div>
                       <div className="calendar__cell _cell-day">7</div>
                       <div className="calendar__cell _cell-day _current">8</div>
                       <div className="calendar__cell _cell-day _weekend _active-day">
@@ -143,7 +169,6 @@ const PopBrowse = () => {
                       </div>
                     </div>
                   </div>
-
                   <input type="hidden" id="datepick_value" value="08.09.2023" />
                   <div className="calendar__period">
                     <p className="calendar__p date-end">
@@ -154,13 +179,17 @@ const PopBrowse = () => {
                 </div>
               </div>
             </div>
+
+            {/* Категория */}
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>
               <div className="categories__theme _orange _active-category">
-                <p className="_orange">Web Design</p>
+                <p className="_orange">{task?.topic || "Web Design"}</p>
               </div>
             </div>
-            <div className="pop-browse__btn-browse ">
+
+            {/* Кнопки */}
+            <div className="pop-browse__btn-browse">
               <div className="btn-group">
                 <button className="btn-browse__edit _btn-bor _hover03">
                   <Link to="/">Редактировать задачу</Link>
@@ -173,6 +202,7 @@ const PopBrowse = () => {
                 <Link to="/">Закрыть</Link>
               </button>
             </div>
+
             <div className="pop-browse__btn-edit _hide">
               <div className="btn-group">
                 <button className="btn-edit__edit _btn-bg _hover01">
@@ -198,4 +228,5 @@ const PopBrowse = () => {
     </div>
   );
 };
+
 export default PopBrowse;

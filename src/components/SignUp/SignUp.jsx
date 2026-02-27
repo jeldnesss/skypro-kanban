@@ -1,4 +1,17 @@
 import { useNavigate, Link } from "react-router-dom";
+import {
+  ContainerInputs,
+  SignInButton,
+  SignInContainer,
+  SignInForm,
+  SignInInput,
+  SignInLink,
+  SignInModal,
+  SignInText,
+  SignInTextContainer,
+  SignInTitle,
+  SignInWrapper,
+} from "../style/SignIn.styled";
 
 function SignUp({ setIsAuth }) {
   const navigate = useNavigate();
@@ -10,58 +23,38 @@ function SignUp({ setIsAuth }) {
   }
 
   return (
-    <div className="wrapper">
-      <div className="container-signup">
-        <div className="modal">
-          <div className="modal__block">
-            <div className="modal__ttl">
-              <h2>Регистрация</h2>
-            </div>
+    <SignInWrapper>
+      <SignInContainer>
+        <SignInModal>
+          <SignInTitle>Регистрация</SignInTitle>
 
-            <form
-              className="modal__form-login"
-              onSubmit={handleSignUp}
-            >
-              <input
-                className="modal__input first-name"
-                type="text"
-                name="first-name"
-                placeholder="Имя"
-              />
+          <SignInForm onSubmit={handleSignUp}>
+            <ContainerInputs>
+              <SignInInput type="text" name="first-name" placeholder="Имя" />
 
-              <input
-                className="modal__input login"
-                type="text"
-                name="login"
-                placeholder="Эл. почта"
-              />
+              <SignInInput type="text" name="login" placeholder="Эл. почта" />
 
-              <input
-                className="modal__input password-first"
+              <SignInInput
                 type="password"
                 name="password"
                 placeholder="Пароль"
               />
+            </ContainerInputs>
 
-              <button
-                className="modal__btn-signup-ent _hover01"
-                type="submit"
-              >
-                Зарегистрироваться
-              </button>
+            <SignInButton type="button" onClick={() => navigate("/sign-in")}>
+              Зарегистрироваться
+            </SignInButton>
 
-              <div className="modal__form-group">
-                <p>
-                  Уже есть аккаунт?{" "}
-                  <Link to="/sign-in">Войдите здесь</Link>
-                </p>
-              </div>
-
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+            <SignInTextContainer>
+              <SignInText>
+                Уже есть аккаунт?{" "}
+                <SignInLink to="/sign-in">Войдите здесь</SignInLink>
+              </SignInText>
+            </SignInTextContainer>
+          </SignInForm>
+        </SignInModal>
+      </SignInContainer>
+    </SignInWrapper>
   );
 }
 

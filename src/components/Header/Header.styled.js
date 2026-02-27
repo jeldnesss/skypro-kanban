@@ -45,6 +45,9 @@ export const HeaderBtn = styled.button`
   line-height: 1;
   font-weight: 500;
   margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     background-color: #33399b;
   }

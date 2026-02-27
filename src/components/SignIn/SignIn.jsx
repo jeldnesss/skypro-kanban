@@ -1,4 +1,17 @@
 import { useNavigate, Link } from "react-router-dom";
+import {
+  ContainerInputs,
+  SignInButton,
+  SignInContainer,
+  SignInForm,
+  SignInInput,
+  SignInLink,
+  SignInModal,
+  SignInText,
+  SignInTextContainer,
+  SignInTitle,
+  SignInWrapper,
+} from "../style/SignIn.styled";
 
 function SignIn({ setIsAuth }) {
   const navigate = useNavigate();
@@ -10,47 +23,31 @@ function SignIn({ setIsAuth }) {
   }
 
   return (
-    <div className="wrapper">
-      <div className="container-signin">
-        <div className="modal">
-          <div className="modal__block">
-            <div className="modal__ttl">
-              <h2>Вход</h2>
-            </div>
+    <SignInWrapper>
+      <SignInContainer>
+        <SignInModal>
+          <SignInTitle>Вход</SignInTitle>
 
-            <form className="modal__form-login" onSubmit={handleLogin}>
-              <input
-                className="modal__input"
-                type="text"
-                name="login"
-                placeholder="Эл. почта"
-              />
+          <SignInForm onSubmit={handleLogin}>
+            <ContainerInputs>
+              <SignInInput type="text" name="login" placeholder="Эл. почта" />
 
-              <input
-                className="modal__input"
+              <SignInInput
                 type="password"
                 name="password"
                 placeholder="Пароль"
               />
+            </ContainerInputs>
 
-              <button
-                className="modal__btn-enter _hover01"
-                type="submit"
-              >
-                Войти
-              </button>
-
-              <div className="modal__form-group">
-                <p>Нужно зарегистрироваться?</p>
-                <Link to="/sign-up">Регистрируйтесь здесь</Link>
-              </div>
-
-            </form>
-
-          </div>
-        </div>
-      </div>
-    </div>
+            <SignInButton type="submit">Войти</SignInButton>
+          </SignInForm>
+          <SignInTextContainer>
+            <SignInText>Нужно зарегистрироваться?</SignInText>
+            <SignInLink to="/sign-up">Регистрируйтесь здесь</SignInLink>
+          </SignInTextContainer>
+        </SignInModal>
+      </SignInContainer>
+    </SignInWrapper>
   );
 }
 

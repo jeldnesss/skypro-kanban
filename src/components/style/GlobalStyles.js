@@ -52,7 +52,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: #f1f1f1;
+    background-color: #EAEEF6;
   }
 
   /* ====== layout ====== */

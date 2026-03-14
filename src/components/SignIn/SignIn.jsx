@@ -12,14 +12,27 @@ import {
   SignInTitle,
   SignInWrapper,
 } from "../style/SignIn.styled";
+import { useState } from "react";
+import { signIn } from "../../services/auth";
 
 function SignIn() {
   const navigate = useNavigate();
 
-  function handleLogin(e) {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  async function handleLogin(e) {
     e.preventDefault();
-    localStorage.setItem("isAuth", "true");
-    navigate("/");
+    setError("");
+    try {
+      const user = await signIn({ login, password });
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("isAuth", "true");
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
   }
 
   return (
@@ -30,16 +43,25 @@ function SignIn() {
 
           <SignInForm onSubmit={handleLogin}>
             <ContainerInputs>
-              <SignInInput type="text" name="login" placeholder="Эл. почта" />
+              <SignInInput
+                type="text"
+                name="login"
+                placeholder="Эл. почта"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
+              />
 
               <SignInInput
                 type="password"
                 name="password"
                 placeholder="Пароль"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </ContainerInputs>
 
             <SignInButton type="submit">Войти</SignInButton>
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </SignInForm>
           <SignInTextContainer>
             <SignInText>Нужно зарегистрироваться?</SignInText>

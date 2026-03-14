@@ -12,14 +12,28 @@ import {
   SignInTitle,
   SignInWrapper,
 } from "../style/SignIn.styled";
+import { useState } from "react";
+import { signUp } from "../../services/auth";
 
-function SignUp({ setIsAuth }) {
+function SignUp() {
   const navigate = useNavigate();
 
-  function handleSignUp(e) {
+  const [name, setName] = useState("");
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  async function handleSignUp(e) {
     e.preventDefault();
-    setIsAuth(true);
-    navigate("/");
+    setError("");
+    try {
+      const user = await signUp({ login, name, password });
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("isAuth", "true");
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
   }
 
   return (
@@ -30,21 +44,33 @@ function SignUp({ setIsAuth }) {
 
           <SignInForm onSubmit={handleSignUp}>
             <ContainerInputs>
-              <SignInInput type="text" name="first-name" placeholder="Имя" />
+              <SignInInput
+                type="text"
+                name="first-name"
+                placeholder="Имя"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
 
-              <SignInInput type="text" name="login" placeholder="Эл. почта" />
+              <SignInInput
+                type="text"
+                name="login"
+                placeholder="Эл. почта"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
+              />
 
               <SignInInput
                 type="password"
                 name="password"
                 placeholder="Пароль"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </ContainerInputs>
 
-            <SignInButton type="button" onClick={() => navigate("/sign-in")}>
-              Зарегистрироваться
-            </SignInButton>
-
+            <SignInButton type="submit">Зарегистрироваться</SignInButton>
+            {error && <p style={{ color: "red" }}>{error}</p>}
             <SignInTextContainer>
               <SignInText>
                 Уже есть аккаунт?{" "}

@@ -1,17 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { cards } from "../../data";
+import { useEffect, useState } from "react";
+import { deleteTask, getTasks } from "../../services/kanban";
 
 const PopBrowse = () => {
+  const token = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).token
+    : null;
   const { id } = useParams();
-  const task = cards.find((t) => t.id === Number(id));
+  const navigate = useNavigate();
+  const [task, setTask] = useState([]);
+  useEffect(() => {
+    if (!token) {
+      return alert("вы не авторизованы");
+    }
+    getTasks(token)
+      .then((tasks) => {
+        const currTask = tasks.find((t) => t._id === id);
+        setTask(currTask);
+      })
+      .catch((err) => console.log(err));
+  });
+  async function handleDelTask() {
+    if (!window.confirm("удалить задачу?")) return;
 
+    try {
+      await deleteTask(token, id);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">
         <div className="pop-browse__block">
           <div className="pop-browse__content">
-            {/* Верхний блок */}
             <div className="pop-browse__top-block">
               <h3 className="pop-browse__ttl">
                 {task?.title || "Название задачи"}
@@ -21,7 +45,6 @@ const PopBrowse = () => {
               </div>
             </div>
 
-            {/* Статус */}
             <div className="pop-browse__status status">
               <p className="status__p subttl">Статус</p>
               <div className="status__themes">
@@ -53,7 +76,6 @@ const PopBrowse = () => {
               </div>
             </div>
 
-            {/* Описание */}
             <div className="pop-browse__wrap">
               <form
                 className="pop-browse__form form-browse"
@@ -75,7 +97,6 @@ const PopBrowse = () => {
                 </div>
               </form>
 
-              {/* Календарь */}
               <div className="pop-new-card__calendar calendar">
                 <p className="calendar__ttl subttl">Даты</p>
                 <div className="calendar__block">
@@ -115,7 +136,6 @@ const PopBrowse = () => {
                       <div className="calendar__day-name -weekend-">вс</div>
                     </div>
                     <div className="calendar__cells">
-                      {/* Оставила весь календарь как у тебя */}
                       <div className="calendar__cell _other-month">28</div>
                       <div className="calendar__cell _other-month">29</div>
                       <div className="calendar__cell _other-month">30</div>
@@ -180,7 +200,6 @@ const PopBrowse = () => {
               </div>
             </div>
 
-            {/* Категория */}
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>
               <div className="categories__theme _orange _active-category">
@@ -188,14 +207,16 @@ const PopBrowse = () => {
               </div>
             </div>
 
-            {/* Кнопки */}
             <div className="pop-browse__btn-browse">
               <div className="btn-group">
                 <button className="btn-browse__edit _btn-bor _hover03">
                   <Link to="/">Редактировать задачу</Link>
                 </button>
-                <button className="btn-browse__delete _btn-bor _hover03">
-                  <Link to="/">Удалить задачу</Link>
+                <button
+                  className="btn-browse__delete _btn-bor _hover03"
+                  onClick={handleDelTask}
+                >
+                  Удалить задачу
                 </button>
               </div>
               <button className="btn-browse__close _btn-bg _hover01">

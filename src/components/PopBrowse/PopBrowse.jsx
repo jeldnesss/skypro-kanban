@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { deleteTask, getTasks } from "../../services/kanban";
 
-const PopBrowse = () => {
+const PopBrowse = ({ setTasks }) => {
   const token = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).token
     : null;
   const { id } = useParams();
   const navigate = useNavigate();
-  const [task, setTask] = useState([]);
+  const [task, setTask] = useState(null);
   useEffect(() => {
     if (!token) {
       return alert("вы не авторизованы");
@@ -20,12 +20,13 @@ const PopBrowse = () => {
         setTask(currTask);
       })
       .catch((err) => console.log(err));
-  });
+  }, [token, id]);
   async function handleDelTask() {
     if (!window.confirm("удалить задачу?")) return;
 
     try {
-      await deleteTask(token, id);
+      const updatedTasks = await deleteTask(token, id);
+      setTasks(updatedTasks);
       navigate("/");
     } catch (err) {
       console.log(err);

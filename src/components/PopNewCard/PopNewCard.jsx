@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import Calendar from "../Calendar/Calendar.jsx";
 import { useState } from "react";
 import { addTask } from "../../services/kanban.js";
@@ -11,7 +11,7 @@ const PopNewCard = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
-
+  const { setTasks } = useOutletContext();
   async function handleCreateCard(e) {
     e.preventDefault();
     if (!token) {
@@ -22,15 +22,16 @@ const PopNewCard = () => {
       return;
     }
     const task = {
-      title: title,
+      title: title || "Новая задача",
       topic: "Research",
       status: "Без статуса",
-      description: description,
+      description: description || "",
       date: "2024-01-07T16:26:18.179Z",
     };
 
     try {
-      await addTask(token, task);
+      const newTask = await addTask(token, task);
+      setTasks(newTask);
       navigate("/");
     } catch (err) {
       setError(err.message);

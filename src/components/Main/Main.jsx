@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Column from "../Column/Column.jsx";
 import { MainBlock, MainContent, MainMain } from "./Main.styled.js";
 import { Container } from "../style/Container.styled.js";
-const Main = () => {
+const Main = ({ tasks }) => {
   const [loading, setLoad] = useState(true);
 
   useEffect(() => {
@@ -20,11 +20,11 @@ const Main = () => {
               <p className="loader">Данные загружаются ...</p>
             ) : (
               <>
-                <Column title="Без статуса" />
-                <Column title="Нужно сделать" />
-                <Column title="В работе" />
-                <Column title="Тестирование" />
-                <Column title="Готово" />
+                <Column title="Без статуса" tasks={tasks} />
+                <Column title="Нужно сделать" tasks={tasks} />
+                <Column title="В работе" tasks={tasks} />
+                <Column title="Тестирование" tasks={tasks} />
+                <Column title="Готово" tasks={tasks} />
               </>
             )}
           </MainContent>

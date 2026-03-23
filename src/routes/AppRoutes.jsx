@@ -1,25 +1,22 @@
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
 import PopNewCard from "../components/PopNewCard/PopNewCard";
 import MainPage from "../components/MainPage/MainPage";
 import SignIn from "../components/SignIn/SignIn";
 import SignUp from "../components/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import NotFoundPage from "../components/NotFoundPage/NotFoundPage";
-import Card from "../components/Card/Card";
 import PopExitModal from "../components/PopExit/PopExit";
 import PopBrowse from "../components/PopBrowse/PopBrowse";
+import { useState } from "react";
 
-function AppRoutes() {
-  const [isAuth, setIsAuth] = useState(
-    localStorage.getItem("isAuth") === "true",
-  );
+function AppRoutes({ isAuth, setIsAuth }) {
+  const [tasks, setTasks] = useState([]);
   return (
     <Routes>
       <Route element={<PrivateRoute isAuth={isAuth} />}>
-        <Route path="/" element={<MainPage />}>
+        <Route path="/" element={<MainPage tasks={tasks} setTasks={setTasks}/>}>
           <Route path="add-card" element={<PopNewCard />} />
-          <Route path="card/:id" element={<PopBrowse />} />
+          <Route path="card/:id" element={<PopBrowse setTasks={setTasks}/>} />
           <Route path="exit" element={<PopExitModal />} />
         </Route>
       </Route>

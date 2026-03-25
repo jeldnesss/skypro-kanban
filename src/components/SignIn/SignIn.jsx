@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 import { signIn } from "../../services/auth";
 
-function SignIn() {
+function SignIn({ setIsAuth }) {
   const navigate = useNavigate();
 
   const [login, setLogin] = useState("");
@@ -27,6 +27,7 @@ function SignIn() {
     setError("");
     try {
       const user = await signIn({ login, password });
+      setIsAuth(true);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("isAuth", "true");
       navigate("/");

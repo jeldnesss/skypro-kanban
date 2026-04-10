@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import PopUser from "../PopUser/PopUser.jsx";
 import {
@@ -11,28 +11,24 @@ import {
   HeaderUser,
 } from "./Header.styled.js";
 import { Container } from "../style/Container.styled.js";
+import AuthContext from "../../context/AuthContext.jsx";
 
 const isDarkTheme = true;
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const {user} = useContext(AuthContext);
   return (
     <HeaderBox>
       <Container>
         <HeaderBlock>
-
-
           <HeaderLogo as={Link} to="/">
             <LogoImg
               src={isDarkTheme ? "/images/logo.png" : "/images/logo_dark.png"}
               alt="logo"
             />
           </HeaderLogo>
-
           <HeaderNav>
-
-
             <HeaderBtn as={Link} to="/add-card">
               Создать новую задачу
             </HeaderBtn>
@@ -41,7 +37,7 @@ const Header = () => {
               as="button"
               onClick={() => setIsOpen(!isOpen)}
             >
-              Ivan Ivanov
+              {user?.name}
             </HeaderUser>
 
             <PopUser isOpen={isOpen} />

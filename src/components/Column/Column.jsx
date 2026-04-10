@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import Card from "../Card/Card.jsx";
 import {
   ColumnTitle,
@@ -5,8 +6,10 @@ import {
   ColumnCards,
   ColumnHeadTitle,
 } from "./Column.styled.js";
+import TasksContext from "../../context/TasksContext.jsx";
 
-const Column = ({ title, tasks }) => {
+const Column = ({ title }) => {
+  const { tasks } = useContext(TasksContext);
   const columnCards = tasks.filter((task) => task.status === title);
 
   return (

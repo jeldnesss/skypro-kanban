@@ -12,14 +12,15 @@ import {
   SignInTitle,
   SignInWrapper,
 } from "../style/SignIn.styled";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { signUp } from "../../services/auth";
+import AuthContext from "../../context/AuthContext";
 
 function SignUp() {
   const navigate = useNavigate();
-
+  const { register } = useContext(AuthContext);
   const [name, setName] = useState("");
-  const [login, setLogin] = useState("");
+  const [loginInput, setLoginInput] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -27,9 +28,8 @@ function SignUp() {
     e.preventDefault();
     setError("");
     try {
-      const user = await signUp({ login, name, password });
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("isAuth", "true");
+      const user = await signUp({ loginInput, name, password });
+      register(user);
       navigate("/");
     } catch (error) {
       setError(error.message);
@@ -56,8 +56,8 @@ function SignUp() {
                 type="text"
                 name="login"
                 placeholder="Эл. почта"
-                value={login}
-                onChange={(e) => setLogin(e.target.value)}
+                value={loginInput}
+                onChange={(e) => setLoginInput(e.target.value)}
               />
 
               <SignInInput

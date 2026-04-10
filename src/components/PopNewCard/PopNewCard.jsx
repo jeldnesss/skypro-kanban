@@ -1,13 +1,17 @@
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import Calendar from "../Calendar/Calendar.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { addTask } from "../../services/kanban.js";
+import TasksContext from "../../context/TasksContext.jsx";
 
 const PopNewCard = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).token
     : null;
+
+  const { addTask } = useContext(TasksContext);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState("");
@@ -30,8 +34,7 @@ const PopNewCard = () => {
     };
 
     try {
-      const newTask = await addTask(token, task);
-      setTasks(newTask);
+      await addTask(task);
       navigate("/");
     } catch (err) {
       setError(err.message);

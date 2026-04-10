@@ -12,24 +12,27 @@ import {
   SignInTitle,
   SignInWrapper,
 } from "../style/SignIn.styled";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { signIn } from "../../services/auth";
+import AuthContext from "../../context/AuthContext";
 
-function SignIn({ setIsAuth }) {
+function SignIn() {
   const navigate = useNavigate();
-
-  const [login, setLogin] = useState("");
+  const { login } = useContext(AuthContext);
+  const [loginInput, setLoginInput] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   async function handleLogin(e) {
     e.preventDefault();
     setError("");
+    if(!loginInput || !password){
+      setError("Введите логин или пароль");
+      return;
+    }
     try {
-      const user = await signIn({ login, password });
-      setIsAuth(true);
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("isAuth", "true");
+      const user = await signIn({ login: loginInput, password });
+      login(user);
       navigate("/");
     } catch (error) {
       setError(error.message);
@@ -48,8 +51,9 @@ function SignIn({ setIsAuth }) {
                 type="text"
                 name="login"
                 placeholder="Эл. почта"
-                value={login}
-                onChange={(e) => setLogin(e.target.value)}
+                value={loginInput}
+                onChange={(e) => setLoginInput(e.target.value)}
+                autoComplete="username"
               />
 
               <SignInInput
@@ -58,6 +62,7 @@ function SignIn({ setIsAuth }) {
                 placeholder="Пароль"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="password"
               />
             </ContainerInputs>
 

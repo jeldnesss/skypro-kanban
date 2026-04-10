@@ -1,32 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { deleteTask, getTasks } from "../../services/kanban";
+import { useContext, useEffect, useState } from "react";
+import TasksContext from "../../context/TasksContext";
 
-const PopBrowse = ({ setTasks }) => {
-  const token = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")).token
-    : null;
+const PopBrowse = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [task, setTask] = useState(null);
+  const { tasks, removeTask } = useContext(TasksContext);
+
   useEffect(() => {
-    if (!token) {
-      return alert("вы не авторизованы");
-    }
-    getTasks(token)
-      .then((tasks) => {
-        const currTask = tasks.find((t) => t._id === id);
-        setTask(currTask);
-      })
-      .catch((err) => console.log(err));
-  }, [token, id]);
+    const currTask = tasks.find((t) => t._id === id);
+    setTask(currTask);
+  }, [tasks, id]);
+
   async function handleDelTask() {
     if (!window.confirm("удалить задачу?")) return;
 
     try {
-      const updatedTasks = await deleteTask(token, id);
-      setTasks(updatedTasks);
+      await removeTask(id);
       navigate("/");
     } catch (err) {
       console.log(err);

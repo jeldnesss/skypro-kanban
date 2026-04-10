@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   PopUserBtn,
   PopUserBtnLink,
@@ -8,11 +9,13 @@ import {
   ThemeInput,
   ThemeText,
 } from "./PopUser.styled";
+import AuthContext from "../../context/AuthContext";
 
 const PopUser = ({ isOpen }) => {
+  const {logout, user} = useContext(AuthContext);
   function handleExit(e) {
     e.preventDefault();
-    localStorage.removeItem("isAuth");
+    logout();
   }
   return (
     <PopUserHeader
@@ -20,8 +23,8 @@ const PopUser = ({ isOpen }) => {
       style={{ display: isOpen ? "block" : "none" }}
     >
       {<a href="">x</a>}
-      <PopUserName>Ivan Ivanov</PopUserName>
-      <PopUserMail>ivan.ivanov@gmail.com</PopUserMail>
+      <PopUserName>{user?.name}</PopUserName>
+      <PopUserMail>{user?.login}</PopUserMail>
       <PopUserTheme>
         <ThemeText>Темная тема</ThemeText>
         <ThemeInput type="checkbox" className="checkbox" name="checkbox" />

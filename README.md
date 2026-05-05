@@ -1,16 +1,56 @@
-# React + Vite
+Основной функционал
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+В приложении реализованы следующие возможности:
 
-Currently, two official plugins are available:
+добавление новых задач
+редактирование задач (название, описание, дата выполнения, статус)
+удаление задач
+распределение задач по колонкам:
+«Без статуса»
+«Нужно сделать»
+«В работе»
+«Тестирование»
+«Готово»
+выбор даты выполнения с использованием кастомного календаря
+авторизация пользователя с сохранением данных в localStorage
+Обработка ошибок и улучшения
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) htmlFor Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) htmlFor Fast Refresh
+В ходе разработки были выполнены следующие доработки:
 
-## React Compiler
+устранены ошибки, возникающие в консоли браузера
+реализована валидация пользовательского ввода (запрещена отправка пустых значений и значений, содержащих только пробелы)
+добавлена обработка ошибок при взаимодействии с сервером
+реализовано отображение уведомлений при успешных действиях и ошибках с использованием библиотеки React Toastify
+добавлено сообщение «Новых задач нет» при отсутствии данных
+реализован пользовательский индикатор загрузки
+создана страница 404 с возможностью перехода на главную страницу
+Дополнительные возможности
 
-The React Compiler is not enabled on this template because of its impact on dev & build perhtmlFormances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+В проекте реализованы дополнительные функции:
 
-## Expanding the ESLint configuration
+Смена темы интерфейса
+реализована светлая и тёмная тема
+переключение темы осуществляется через пользовательский интерфейс
+выбранная тема сохраняется и применяется при повторном открытии приложения
+Уведомления
+реализованы всплывающие уведомления при действиях пользователя
+уведомления информируют об успешных операциях и возникновении ошибок
+Используемые технологии
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) htmlFor inhtmlFormation on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+В проекте применены следующие технологии и библиотеки:
+
+React
+React Router
+Styled-components
+Axios
+React Toastify
+Структура проекта
+components — компоненты пользовательского интерфейса
+context — глобальные состояния приложения (авторизация, задачи, тема)
+routes — маршрутизация
+assets — статические ресурсы
+Запуск проекта
+Установка зависимостей:
+npm install
+Запуск проекта:
+npm run dev

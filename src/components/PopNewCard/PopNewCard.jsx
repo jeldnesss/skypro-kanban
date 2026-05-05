@@ -1,44 +1,45 @@
-import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import Calendar from "../Calendar/Calendar.jsx";
-import { useContext, useState } from "react";
-import { addTask } from "../../services/kanban.js";
-import TasksContext from "../../context/TasksContext.jsx";
+import { Link, useNavigate } from 'react-router-dom';
+import Calendar from '../Calendar/Calendar.jsx';
+import { useContext, useState } from 'react';
+
+import TasksContext from '../../context/TasksContext.jsx';
+import AuthContext from '../../context/AuthContext.jsx';
+import { toast } from 'react-toastify';
 
 const PopNewCard = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")).token
-    : null;
 
   const { addTask } = useContext(TasksContext);
+  const { user } = useContext(AuthContext);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [error, setError] = useState("");
-  const { setTasks } = useOutletContext();
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [error, setError] = useState('');
+
   async function handleCreateCard(e) {
     e.preventDefault();
-    if (!token) {
-      return alert("вы не авторизованы");
+    if (!user) {
+      return alert('вы не авторизованы');
     }
     if (!title.trim()) {
-      setError("введите название задачи");
+      setError('введите название задачи');
+      toast.warning('Введите название задачи');
       return;
     }
     const task = {
-      title: title || "Новая задача",
-      topic: "Research",
-      status: "Без статуса",
-      description: description || "",
-      date: "2024-01-07T16:26:18.179Z",
+      title: title || 'Новая задача',
+      topic: 'Research',
+      status: 'Без статуса',
+      description: description || '',
+      date: selectedDate || new Date().toISOString(),
     };
 
     try {
       await addTask(task);
-      navigate("/");
+      navigate('/');
     } catch (err) {
       setError(err.message);
-      console.log(err);
     }
   }
   return (
@@ -80,10 +81,10 @@ const PopNewCard = () => {
                 <button className="form-new__create _hover01" type="submit">
                   Создать задачу
                 </button>
-                {error && <p style={{ color: "red" }}>{error}</p>}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
               </form>
 
-              <Calendar />
+              <Calendar onSelectDate={setSelectedDate} />
             </div>
           </div>
         </div>

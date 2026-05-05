@@ -1,12 +1,13 @@
-import { useContext } from "react";
-import Card from "../Card/Card.jsx";
+import { useContext } from 'react';
+import Card from '../Card/Card.jsx';
 import {
   ColumnTitle,
   MainColumn,
   ColumnCards,
   ColumnHeadTitle,
-} from "./Column.styled.js";
-import TasksContext from "../../context/TasksContext.jsx";
+  ColumnNoTasks,
+} from './Column.styled.js';
+import TasksContext from '../../context/TasksContext.jsx';
 
 const Column = ({ title }) => {
   const { tasks } = useContext(TasksContext);
@@ -19,16 +20,20 @@ const Column = ({ title }) => {
       </ColumnTitle>
 
       <ColumnCards>
-        {columnCards.map((card) => (
-          <Card
-            key={card._id}
-            id={card._id}
-            topic={card.topic}
-            title={card.title}
-            date={card.date}
-            status={card.status}
-          />
-        ))}
+        {columnCards.length === 0 ? (
+          <ColumnNoTasks>Новых задач нет</ColumnNoTasks>
+        ) : (
+          columnCards.map((card) => (
+            <Card
+              key={card._id}
+              id={card._id}
+              topic={card.topic}
+              title={card.title}
+              date={card.date}
+              status={card.status}
+            />
+          ))
+        )}
       </ColumnCards>
     </MainColumn>
   );

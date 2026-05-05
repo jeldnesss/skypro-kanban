@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   * {
@@ -49,7 +49,7 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     color: #000000;
-    background-color: #EAEEF6;
+    background-color: ${({ theme }) => theme.bg};
   }
 
   /* ====== layout ====== */
@@ -59,7 +59,7 @@ export const GlobalStyles = createGlobalStyle`
     width: 100vw;
     min-height: 100vh;
     overflow: hidden;
-    background-color: #EAEEF6;
+    background-color: ${({ theme }) => theme.bg};
   }
 
   .container {

@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HeaderBox = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.header};
 `;
 
 export const HeaderBlock = styled.div`
@@ -63,7 +63,7 @@ export const HeaderUser = styled.a`
   line-height: 20px;
   color: #565eef;
   &::after {
-    content: "";
+    content: '';
     display: block;
     width: 6px;
     height: 6px;

@@ -22,7 +22,6 @@ const Card = ({ id, topic, title, date }) => {
             <CardThemeText>{topic}</CardThemeText>
           </CardTheme>
 
-          {/* Ссылка на PopBrowse через React Router */}
           <Link to={`/card/${id}`}>
             <CardBtn>
               <CardBtnBox />
@@ -35,7 +34,10 @@ const Card = ({ id, topic, title, date }) => {
         <CardContent>
           <CardTitle>{title}</CardTitle>
           <CardDate>
-            <CardDateText>{date}</CardDateText>
+            <CardDateText>
+              {" "}
+              {date ? new Date(date).toLocaleDateString("ru-RU") : ""}
+            </CardDateText>
           </CardDate>
         </CardContent>
       </CardsCard>

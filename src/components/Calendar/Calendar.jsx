@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   CalendarPopNewCard,
   CalendarSubtitle,
@@ -16,17 +17,50 @@ import {
   CalendarPeriodText,
 } from "./Calendar.styled.js";
 
-const Calendar = () => {
+const Calendar = ({ onSelectDate, initialDate }) => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDay, setSelectedDay] = useState(null);
+  function handleSelect(day) {
+    setSelectedDay(day);
+
+    const selectedDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      day,
+    );
+    onSelectDate(selectedDate.toISOString());
+  }
+  function prevMonth() {
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1),
+    );
+  }
+
+  function nextMonth() {
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1),
+    );
+  }
+  useEffect(() => {
+    if (initialDate) {
+      const d = new Date(initialDate);
+      setCurrentDate(d);
+      setSelectedDay(d.getDate());
+    }
+  }, [initialDate]);
   return (
     <CalendarPopNewCard>
       <CalendarSubtitle>Даты</CalendarSubtitle>
 
       <CalendarBlock>
         <CalendarNav>
-          <CalendarMonth>Сентябрь 2023</CalendarMonth>
+          <CalendarMonth>
+            {currentDate.toLocaleString("ru-RU", { month: "long" })}{" "}
+            {currentDate.getFullYear()}
+          </CalendarMonth>
 
           <CalendarActions>
-            <CalendarAction data-action="prev">
+            <CalendarAction data-action="prev" onClick={prevMonth}>
               <CalendarSvg
                 xmlns="http://www.w3.org/2000/svg"
                 width="6"
@@ -37,7 +71,7 @@ const Calendar = () => {
               </CalendarSvg>
             </CalendarAction>
 
-            <CalendarAction data-action="next">
+            <CalendarAction data-action="next" onClick={nextMonth}>
               <CalendarSvg
                 xmlns="http://www.w3.org/2000/svg"
                 width="6"
@@ -62,55 +96,43 @@ const Calendar = () => {
           </CalendarDaysNames>
 
           <CalendarCells>
-            <CalendarCell $other>28</CalendarCell>
-            <CalendarCell $other>29</CalendarCell>
-            <CalendarCell $other>30</CalendarCell>
+            {(() => {
+              const year = currentDate.getFullYear();
+              const month = currentDate.getMonth();
 
-            <CalendarCell>31</CalendarCell>
-            <CalendarCell>1</CalendarCell>
+              const firstDay = new Date(year, month, 1).getDay() || 7;
+              const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-            <CalendarCell $weekend>2</CalendarCell>
-            <CalendarCell $weekend>3</CalendarCell>
+              const cells = [];
 
-            <CalendarCell>4</CalendarCell>
-            <CalendarCell>5</CalendarCell>
-            <CalendarCell>6</CalendarCell>
-            <CalendarCell>7</CalendarCell>
+              for (let i = firstDay - 2; i >= 0; i--) {
+                cells.push(
+                  <CalendarCell key={"prev" + i} $other>
+                    {" "}
+                  </CalendarCell>,
+                );
+              }
 
-            <CalendarCell $current>8</CalendarCell>
+              for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const isWeekend = date.getDay() === 0 || date.getDay() === 6;
 
-            <CalendarCell $weekend>9</CalendarCell>
-            <CalendarCell $weekend>10</CalendarCell>
+                cells.push(
+                  <CalendarCell
+                    key={day}
+                    $weekend={isWeekend}
+                    onClick={() => handleSelect(day)}
+                    style={{
+                      background: selectedDay === day ? "#565eef" : "",
+                    }}
+                  >
+                    {day}
+                  </CalendarCell>,
+                );
+              }
 
-            <CalendarCell>11</CalendarCell>
-            <CalendarCell>12</CalendarCell>
-            <CalendarCell>13</CalendarCell>
-            <CalendarCell>14</CalendarCell>
-            <CalendarCell>15</CalendarCell>
-
-            <CalendarCell $weekend>16</CalendarCell>
-            <CalendarCell $weekend>17</CalendarCell>
-
-            <CalendarCell>18</CalendarCell>
-            <CalendarCell>19</CalendarCell>
-            <CalendarCell>20</CalendarCell>
-            <CalendarCell>21</CalendarCell>
-            <CalendarCell>22</CalendarCell>
-
-            <CalendarCell $weekend>23</CalendarCell>
-            <CalendarCell $weekend>24</CalendarCell>
-
-            <CalendarCell>25</CalendarCell>
-            <CalendarCell>26</CalendarCell>
-            <CalendarCell>27</CalendarCell>
-            <CalendarCell>28</CalendarCell>
-            <CalendarCell>29</CalendarCell>
-
-            <CalendarCell $weekend>30</CalendarCell>
-
-            <CalendarCell $weekend $other>
-              1
-            </CalendarCell>
+              return cells;
+            })()}
           </CalendarCells>
         </CalendarContent>
 
@@ -118,7 +140,17 @@ const Calendar = () => {
 
         <CalendarPeriod>
           <CalendarPeriodText>
-            Выберите срок исполнения <span></span>.
+            Выберите срок исполнения{" "}
+            <span>
+              {selectedDay
+                ? new Date(
+                    currentDate.getFullYear(),
+                    currentDate.getMonth(),
+                    selectedDay,
+                  ).toLocaleDateString("ru-RU")
+                : ""}
+            </span>
+            .
           </CalendarPeriodText>
         </CalendarPeriod>
       </CalendarBlock>

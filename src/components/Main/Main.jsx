@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Column from "../Column/Column.jsx";
-import { MainBlock, MainContent, MainMain } from "./Main.styled.js";
+import { Loader, MainBlock, MainContent, MainMain } from "./Main.styled.js";
 import { Container } from "../style/Container.styled.js";
 const Main = () => {
   const [loading, setLoad] = useState(true);
@@ -17,7 +17,7 @@ const Main = () => {
         <MainBlock>
           <MainContent>
             {loading ? (
-              <p className="loader">Данные загружаются ...</p>
+             <Loader/>
             ) : (
               <>
                 <Column title="Без статуса" />

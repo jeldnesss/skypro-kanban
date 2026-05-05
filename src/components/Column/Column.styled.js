@@ -22,3 +22,10 @@ export const ColumnHeadTitle = styled.p`
   text-transform: uppercase;
   color: #94a6be;
 `;
+
+export const ColumnNoTasks = styled.p`
+  font-size: 14px;
+  color: #707e91;
+  display: inline-block;
+  margin-left: 11px;
+`;

@@ -21,19 +21,33 @@ export function TasksProvider({ children }) {
   }, [user]);
 
   const addTaskHandler = async (task) => {
-    await addTask(user.token, task);
-    const updatedTasks = await getTasks(user.token);
-    setTasks(updatedTasks);
+    const created = await addTask(user.token, task);
+
+    const safeTask = {
+      _id: created._id,
+      title: task.title,
+      description: task.description,
+      status: task.status,
+      topic: task.topic,
+      date: task.date,
+    };
+
+    setTasks((prev) => [...prev, safeTask]);
   };
   const updateTask = async (id, updatedData) => {
     await editTask(user.token, id, updatedData);
-    const updatedTasks = await getTasks(user.token);
-    setTasks(updatedTasks);
+
+    setTasks((prev) =>
+      prev.map((task) =>
+        task._id === id ? { ...task, ...updatedData } : task,
+      ),
+    );
   };
 
   const removeTask = async (id) => {
-    const updated = await deleteTask(user.token, id);
-    setTasks(updated);
+    await deleteTask(user.token, id);
+
+    setTasks((prev) => prev.filter((task) => task._id !== id));
   };
   return (
     <TasksContext.Provider

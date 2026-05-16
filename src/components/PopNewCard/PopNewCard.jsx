@@ -15,6 +15,7 @@ const PopNewCard = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
+  const [topic, setTopic] = useState('Research');
   const [error, setError] = useState('');
 
   async function handleCreateCard(e) {
@@ -29,7 +30,7 @@ const PopNewCard = () => {
     }
     const task = {
       title: title || 'Новая задача',
-      topic: 'Research',
+      topic,
       status: 'Без статуса',
       description: description || '',
       date: selectedDate || new Date().toISOString(),
@@ -68,6 +69,15 @@ const PopNewCard = () => {
                     onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
+                <select
+                  className="form-new__select"
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                >
+                  <option value="Research">Research</option>
+                  <option value="Web Design">Web Design</option>
+                  <option value="Copywriting">Copywriting</option>
+                </select>
 
                 <div className="form-new__block">
                   <label className="subttl">Описание задачи</label>

@@ -116,7 +116,13 @@ body {
   top: 0;
   left: 0;
 }
+.form-new__select{
+  margin: 20px 0;
+  width: 140px;
+  border: 2px solid #565eef;
+  border-radius: 20px;
 
+}
 .pop-exit {
   display: none;
   width: 100%;

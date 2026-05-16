@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import TasksContext from '../../context/TasksContext';
 import Calendar from '../Calendar/Calendar.jsx';
-import { editTask } from '../../services/kanban.js';
+
 import { toast } from 'react-toastify';
 
 const PopBrowse = () => {

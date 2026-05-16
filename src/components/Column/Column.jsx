@@ -20,20 +20,16 @@ const Column = ({ title }) => {
       </ColumnTitle>
 
       <ColumnCards>
-        {columnCards.length === 0 ? (
-          <ColumnNoTasks>Новых задач нет</ColumnNoTasks>
-        ) : (
-          columnCards.map((card) => (
-            <Card
-              key={card._id}
-              id={card._id}
-              topic={card.topic}
-              title={card.title}
-              date={card.date}
-              status={card.status}
-            />
-          ))
-        )}
+        {columnCards.map((card) => (
+          <Card
+            key={card._id}
+            id={card._id}
+            topic={card.topic}
+            title={card.title}
+            date={card.date}
+            status={card.status}
+          />
+        ))}
       </ColumnCards>
     </MainColumn>
   );

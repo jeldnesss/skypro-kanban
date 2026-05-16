@@ -1,25 +1,25 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 import {
-  PopExit,
+  PopExitModal,
   PopExitContainer,
   PopExitBlock,
   PopExitTitleWrap,
   PopExitFormGroup,
   ExitYesBtn,
   ExitNoBtn,
-} from "./PopExit.styled";
-import AuthContext from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+} from './PopExit.styled';
+import AuthContext from '../../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 
-const PopExitModal = () => {
-  const {logout} = useContext(AuthContext);
+const PopExit = () => {
+  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  function handleExit(){
+  function handleExit() {
     logout();
-    navigate("/sign-in");
+    navigate('/sign-in');
   }
   return (
-    <PopExit id="popExit">
+    <PopExitModal id="popExit">
       <PopExitContainer>
         <PopExitBlock>
           <PopExitTitleWrap>
@@ -27,18 +27,16 @@ const PopExitModal = () => {
           </PopExitTitleWrap>
 
           <PopExitFormGroup>
-             <ExitYesBtn onClick={handleExit}>
-              Да, выйти
-            </ExitYesBtn>
+            <ExitYesBtn onClick={handleExit}>Да, выйти</ExitYesBtn>
 
             <ExitNoBtn>
-              <a href="#">Нет, остаться</a>
+              <Link to="/">Нет, остаться</Link>
             </ExitNoBtn>
           </PopExitFormGroup>
         </PopExitBlock>
       </PopExitContainer>
-    </PopExit>
+    </PopExitModal>
   );
 };
 
-export default PopExitModal;
+export default PopExit;

@@ -11,20 +11,22 @@ import {
 } from './PopUser.styled';
 import AuthContext from '../../context/AuthContext';
 import ThemeContext from '../../context/ThemeContext';
+import { Link } from 'react-router-dom';
 
 const PopUser = ({ isOpen }) => {
-  const { logout, user } = useContext(AuthContext);
-  function handleExit(e) {
-    e.preventDefault();
-    logout();
-  }
+  const { user } = useContext(AuthContext);
+
   const { theme, setTheme } = useContext(ThemeContext);
   return (
     <PopUserHeader
       id="user-set-target"
       style={{ display: isOpen ? 'block' : 'none' }}
     >
-      {<a href="">x</a>}
+      
+        <Link to="/" className="pop-user__close">
+          x
+        </Link>
+      
       <PopUserName>{user?.name}</PopUserName>
       <PopUserMail>{user?.login}</PopUserMail>
       <PopUserTheme>
@@ -37,8 +39,8 @@ const PopUser = ({ isOpen }) => {
           onChange={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         />
       </PopUserTheme>
-      <PopUserBtn onClick={handleExit} type="button" className="_hover03">
-        <PopUserBtnLink to="/sign-in">Выйти</PopUserBtnLink>
+      <PopUserBtn type="button" className="_hover03">
+        <PopUserBtnLink to="/exit">Выйти</PopUserBtnLink>
       </PopUserBtn>
     </PopUserHeader>
   );

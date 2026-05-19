@@ -46,6 +46,7 @@ export const CardTheme = styled.div`
         return "#FFE4C2";
     }
   }};
+  
 
   color: ${({ topic }) => {
     switch (topic) {

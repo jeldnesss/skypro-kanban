@@ -40,7 +40,7 @@ export async function editTask(token, id, task) {
       'Content-Type': '',
     },
   });
-  return response.data.tasks;
+   return response.data.tasks;
 }
 
 export async function deleteTask(token, id) {

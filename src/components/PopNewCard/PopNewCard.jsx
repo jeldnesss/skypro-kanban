@@ -69,15 +69,6 @@ const PopNewCard = () => {
                     onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
-                <select
-                  className="form-new__select"
-                  value={topic}
-                  onChange={(e) => setTopic(e.target.value)}
-                >
-                  <option value="Research">Research</option>
-                  <option value="Web Design">Web Design</option>
-                  <option value="Copywriting">Copywriting</option>
-                </select>
 
                 <div className="form-new__block">
                   <label className="subttl">Описание задачи</label>
@@ -87,6 +78,34 @@ const PopNewCard = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                   />
+                </div>
+                <div className="category-group">
+                  <label className="subttl">Категория</label>
+                  <div className="category-btns">
+                    <button
+                      type="button"
+                      className={`card-theme research-non-active ${topic === 'Research' ? 'research' : ''}`}
+                      onClick={() => setTopic('Research')}
+                    >
+                      Research
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`card-theme web-design-non-active ${topic === 'Web Design' ? 'web-design' : ''}`}
+                      onClick={() => setTopic('Web Design')}
+                    >
+                      Web Design
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`card-theme copywriting-non-active ${topic === 'Copywriting' ? 'copywriting' : ''}`}
+                      onClick={() => setTopic('Copywriting')}
+                    >
+                      Copywriting
+                    </button>
+                  </div>
                 </div>
                 <button className="form-new__create _hover01" type="submit">
                   Создать задачу

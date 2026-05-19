@@ -21,27 +21,14 @@ export function TasksProvider({ children }) {
   }, [user]);
 
   const addTaskHandler = async (task) => {
-    const created = await addTask(user.token, task);
+    const updatedTasks = await addTask(user.token, task);
 
-    const safeTask = {
-      _id: created._id,
-      title: task.title,
-      description: task.description,
-      status: task.status,
-      topic: task.topic,
-      date: task.date,
-    };
-
-    setTasks((prev) => [...prev, safeTask]);
+    setTasks(updatedTasks);
   };
   const updateTask = async (id, updatedData) => {
-    await editTask(user.token, id, updatedData);
+    const updatedTasks = await editTask(user.token, id, updatedData);
 
-    setTasks((prev) =>
-      prev.map((task) =>
-        task._id === id ? { ...task, ...updatedData } : task,
-      ),
-    );
+    setTasks(updatedTasks);
   };
 
   const removeTask = async (id) => {

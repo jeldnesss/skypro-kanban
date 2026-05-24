@@ -1,41 +1,37 @@
-import "./App.css";
-import Header from "./assets/components/Header/Header.jsx";
-import PopNewCard from "./assets/components/PopNewCard/PopNewCard.jsx";
-import PopBrowse from "./assets/components/PopBrowse/PopBrowse.jsx";
-import Main from "./assets/components//Main/Main.jsx";
+import { useEffect, useState } from 'react';
+import './App.css';
+import { GlobalStyles } from './components/style/GlobalStyles.js';
+import AppRoutes from './routes/AppRoutes.jsx';
+import { ThemeProvider } from 'styled-components';
+import ThemeContext from './context/ThemeContext.jsx';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
+  const lightTheme = {
+    header: '#ffffff',
+    bg: '#EAEEF6',
+  };
+  const darkTheme = {
+    header: '#333333',
+    bg: '#000000',
+  };
+  const [isAuth, setIsAuth] = useState(false);
+  const [theme, setTheme] = useState('light');
+  useEffect(() => {
+    const auth = localStorage.getItem('isAuth');
+    if (auth === 'true') {
+      setIsAuth(true);
+    }
+  }, []);
+
   return (
-    <>
-      <div className="wrapper">
-        <div className="pop-exit" id="popExit">
-          <div className="pop-exit__container">
-            <div className="pop-exit__block">
-              <div className="pop-exit__ttl">
-                <h2>Выйти из аккаунта?</h2>
-              </div>
-              <form className="pop-exit__htmlForm" id="htmlFormExit" action="#">
-                <div className="pop-exit__htmlForm-group">
-                  <button className="pop-exit__exit-yes _hover01" id="exitYes">
-                    <a href="modal/signin.html">Да, выйти</a>{" "}
-                  </button>
-                  <button className="pop-exit__exit-no _hover03" id="exitNo">
-                    <a href="main.html">Нет, остаться</a>{" "}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <PopNewCard />
-
-        <PopBrowse />
-
-        <Header />
-        <Main />
-      </div>
-    </>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyles />
+        <AppRoutes isAuth={isAuth} setIsAuth={setIsAuth} />
+        <ToastContainer />
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 

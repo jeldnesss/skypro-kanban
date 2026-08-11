@@ -1,10 +1,23 @@
-const Card = ({ theme, color, title, date }) => {
+const Card = ({ topic, title, date, status }) => {
+  const getColorClass = () => {
+    switch (status) {
+      case "Готово":
+        return "_green";
+      case "В работе":
+        return "_orange";
+      case "Нужно сделать":
+      case "Тестирование":
+        return "_purple";
+      default:
+        return "_gray";
+    }
+  };
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
-          <div className={`card__theme ${color}`}>
-            <p className={color}>{theme}</p>
+          <div className={`card__theme ${getColorClass()}`}>
+            <p>{topic}</p>
           </div>
 
           <a href="#popBrowse">
